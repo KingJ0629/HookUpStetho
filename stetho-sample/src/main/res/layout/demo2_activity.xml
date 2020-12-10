@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:padding="15dp">
+
+  <Button
+      android:id="@+id/init_btn"
+      android:layout_width="@dimen/main_button_width"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:text="初始化"
+      />
+
+  <Button
+      android:id="@+id/invoke_btn"
+      android:layout_width="@dimen/main_button_width"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:text="执行命令"
+      />
+
+  <Button
+      android:id="@+id/request"
+      android:layout_width="@dimen/main_button_width"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:text="请求接口"
+      />
+
+  <Button
+      android:id="@+id/jump"
+      android:layout_width="@dimen/main_button_width"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:text="跳转"
+      />
+
+</LinearLayout>
