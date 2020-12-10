@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:padding="15dp">
+
+  <TextView
+      android:id="@+id/settings_btn"
+      android:layout_width="@dimen/main_button_width"
+      android:layout_height="100dp"
+      android:layout_marginBottom="10dp"
+      android:background="#003300"
+      android:text="哈哈哈哈哈"
+      />
+</LinearLayout>

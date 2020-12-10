@@ -16,7 +16,7 @@ import java.io.InputStream;
 /**
  * WebSocket frame as per RFC6455.
  */
-class Frame {
+public class Frame {
   public static final byte OPCODE_TEXT_FRAME = 0x1;
   public static final byte OPCODE_BINARY_FRAME = 0x2;
   public static final byte OPCODE_CONNECTION_CLOSE = 0x8;
@@ -41,7 +41,8 @@ class Frame {
     maskingKey = hasMask ? decodeMaskingKey(input) : null;
     payloadData = new byte[(int)payloadLen];
     readBytesOrThrow(input, payloadData, 0, (int)payloadLen);
-    MaskingHelper.unmask(maskingKey, payloadData, 0, (int)payloadLen);
+    if (maskingKey != null)
+      MaskingHelper.unmask(maskingKey, payloadData, 0, (int)payloadLen);
   }
 
   public void writeTo(BufferedOutputStream output) throws IOException {

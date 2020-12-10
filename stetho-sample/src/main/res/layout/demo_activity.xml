@@ -11,15 +11,7 @@
       android:layout_width="@dimen/main_button_width"
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
-      android:text="@string/settings_btn"
-      />
-
-  <Button
-      android:id="@+id/apod_btn"
-      android:layout_width="@dimen/main_button_width"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:text="@string/apod_btn"
+      android:text="初始化"
       />
 
   <Button
@@ -27,7 +19,15 @@
       android:layout_width="@dimen/main_button_width"
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
-      android:text="@string/irc_btn"
+      android:text="获取DOM"
+      />
+
+  <Button
+      android:id="@+id/apod_btn"
+      android:layout_width="@dimen/main_button_width"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:text="开启网络，并请求"
       />
 
   <Button
@@ -35,7 +35,15 @@
       android:layout_width="@dimen/main_button_width"
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
-      android:text="@string/about"
+      android:text="请求接口"
+      />
+
+  <Button
+      android:id="@+id/jump"
+      android:layout_width="@dimen/main_button_width"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:text="跳转"
       />
 
 </LinearLayout>

@@ -7,6 +7,8 @@
 
 package com.facebook.stetho.websocket;
 
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -35,8 +37,14 @@ class ReadHandler {
   public void readLoop(ReadCallback readCallback) throws IOException {
     Frame frame = new Frame();
     do {
-      frame.readFrom(mBufferedInput);
+      Log.i("247144", "ReadHandler frame.readFrom————>阻塞");
+      try {
+        frame.readFrom(mBufferedInput);
+      } catch (Exception e) {
+        Log.i("247144", "Exception!");
+      }
       mCurrentPayload.write(frame.payloadData, 0, (int)frame.payloadLen);
+      Log.i("247144", "ReadHandler mCurrentPayload————>" + mCurrentPayload.toString());
       if (frame.fin) {
         byte[] completePayload = mCurrentPayload.toByteArray();
         readCallback.onCompleteFrame(frame.opcode, completePayload, completePayload.length);

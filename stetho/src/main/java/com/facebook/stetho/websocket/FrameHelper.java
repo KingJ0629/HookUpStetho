@@ -9,7 +9,7 @@ package com.facebook.stetho.websocket;
 
 import com.facebook.stetho.common.Utf8Charset;
 
-class FrameHelper {
+public class FrameHelper {
   public static Frame createTextFrame(String payload) {
     return createSimpleFrame(Frame.OPCODE_TEXT_FRAME, Utf8Charset.encodeUTF8(payload));
   }

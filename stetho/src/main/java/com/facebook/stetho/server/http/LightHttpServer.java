@@ -7,9 +7,10 @@
 
 package com.facebook.stetho.server.http;
 
-import android.net.LocalSocket;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
 import com.facebook.stetho.server.LeakyBufferedInputStream;
 import com.facebook.stetho.server.SocketLike;
 
@@ -50,6 +51,7 @@ public class LightHttpServer {
 
     // This loops assumes we are always using keep-alive connections.  If we're wrong, we
     // expect the client to just close the connection.
+    Log.i("247144", "readRequestMessage(scratchRequest, reader) 之前");
     while ((request = readRequestMessage(scratchRequest, reader)) != null) {
       final LightHttpResponse response = scratchResponse;
       response.reset();
@@ -57,12 +59,14 @@ public class LightHttpServer {
       // Note, if we're upgrading to websockets, this will block for the lifetime of the
       // websocket session...
       boolean keepGoing = dispatchToHandler(anotherSocketLike, request, response);
+      Log.i("247144", "keepGoing：：" + keepGoing);
       if (!keepGoing) {
         // Orderly shutdown, ignore response and break the loop.
         break;
       }
 
       writeFullResponse(response, writer, output);
+      Log.i("247144", "writeFullResponse");
     }
   }
 
@@ -95,6 +99,8 @@ public class LightHttpServer {
       }
     }
   }
+  
+  static int i = 0;
 
   @Nullable
   private static LightHttpRequest readRequestMessage(
@@ -102,8 +108,11 @@ public class LightHttpServer {
       HttpMessageReader reader)
       throws IOException {
     request.reset();
-
+    
+    i++;
+    Log.i("247144", "readRequestMessage 阻塞中");
     String requestLine = reader.readLine();
+    Log.i("247144", i + "___" + requestLine);
     if (requestLine == null) {
       return null;
     }
@@ -118,17 +127,18 @@ public class LightHttpServer {
     request.uri = Uri.parse(requestParts[1]);
     request.protocol = requestParts[2];
 
-    readHeaders(request, reader);
+    readHeaders(request, reader, i);
 
     return request;
   }
 
   private static void readHeaders(
       LightHttpMessage message,
-      HttpMessageReader reader) throws IOException {
+      HttpMessageReader reader, int i) throws IOException {
     String headerLine;
     while (true) {
       headerLine = reader.readLine();
+      Log.i("247144", i + "___" + headerLine);
       if (headerLine == null) {
         throw new EOFException();
       } else if ("".equals(headerLine)) {
@@ -177,7 +187,7 @@ public class LightHttpServer {
    * are both mechanized and will not contain non-ASCII characters in the control messages upon
    * which this reader is applied.
    */
-  private static class HttpMessageReader {
+  public static class HttpMessageReader {
     private final BufferedInputStream mIn;
     private final StringBuilder mBuffer = new StringBuilder();
     private final NewLineDetector mNewLineDetector = new NewLineDetector();

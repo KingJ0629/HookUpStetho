@@ -9,10 +9,10 @@ package com.facebook.stetho.server;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.net.Credentials;
 import android.net.LocalSocket;
 import android.util.Log;
+
 import com.facebook.stetho.common.LogUtil;
 
 import java.io.IOException;
@@ -49,9 +49,9 @@ public abstract class SecureSocketHandler implements SocketHandler {
 
     String requiredPermission = Manifest.permission.DUMP;
     int checkResult = context.checkPermission(requiredPermission, pid, uid);
-    if (checkResult != PackageManager.PERMISSION_GRANTED) {
-      throw new PeerAuthorizationException(
-          "Peer pid=" + pid + ", uid=" + uid + " does not have " + requiredPermission);
-    }
+//    if (checkResult != PackageManager.PERMISSION_GRANTED) {
+//      throw new PeerAuthorizationException(
+//          "Peer pid=" + pid + ", uid=" + uid + " does not have " + requiredPermission);
+//    }
   }
 }
