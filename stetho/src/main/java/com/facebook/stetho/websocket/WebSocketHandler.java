@@ -8,17 +8,16 @@
 package com.facebook.stetho.websocket;
 
 import android.util.Base64;
+
 import com.facebook.stetho.common.Utf8Charset;
+import com.facebook.stetho.server.SocketLike;
 import com.facebook.stetho.server.http.HttpHandler;
 import com.facebook.stetho.server.http.HttpStatus;
-import com.facebook.stetho.server.SocketLike;
 import com.facebook.stetho.server.http.LightHttpBody;
 import com.facebook.stetho.server.http.LightHttpMessage;
 import com.facebook.stetho.server.http.LightHttpRequest;
 import com.facebook.stetho.server.http.LightHttpResponse;
 import com.facebook.stetho.server.http.LightHttpServer;
-
-import javax.annotation.Nullable;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -26,6 +25,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import javax.annotation.Nullable;
 
 /**
  * Crazy kludge to support upgrading to the WebSocket protocol while still using the
@@ -78,6 +79,7 @@ public class WebSocketHandler implements HttpHandler {
 
     // This will not return on successful WebSocket upgrade, but rather block until the session is
     // shut down or a socket error occurs.
+    // socket握手
     doUpgrade(socket, request, response);
     return false;
   }
@@ -112,6 +114,7 @@ public class WebSocketHandler implements HttpHandler {
         new LightHttpServer.HttpMessageWriter(new BufferedOutputStream(out)));
 
     WebSocketSession session = new WebSocketSession(in, out, mEndpoint);
+    // 建立连接
     session.handle();
   }
 

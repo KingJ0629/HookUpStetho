@@ -38,11 +38,8 @@ class ReadHandler {
     Frame frame = new Frame();
     do {
       Log.i("247144", "ReadHandler frame.readFrom————>阻塞");
-      try {
-        frame.readFrom(mBufferedInput);
-      } catch (Exception e) {
-        Log.i("247144", "Exception!");
-      }
+      // 阻塞等待客户端命令
+      frame.readFrom(mBufferedInput);
       mCurrentPayload.write(frame.payloadData, 0, (int)frame.payloadLen);
       Log.i("247144", "ReadHandler mCurrentPayload————>" + mCurrentPayload.toString());
       if (frame.fin) {

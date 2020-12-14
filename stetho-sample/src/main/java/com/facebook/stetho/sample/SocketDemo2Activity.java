@@ -58,6 +58,7 @@ public class SocketDemo2Activity extends Activity {
 		for (int i = 0; i < commandList.size(); i++) {
 			String command = getCommand(i);
 			Frame frame = FrameHelper.createTextFrame(command);
+			frame.hasMask = true;
 			frame.writeTo(mBufferedOutputStream);
 			Log.i("247144", "发送到服务端去————>command::" + command);
 		}
@@ -74,6 +75,7 @@ public class SocketDemo2Activity extends Activity {
 	private void sendJsonStr(OutputStream out, String str) throws IOException {
 		BufferedOutputStream mBufferedOutputStream = new BufferedOutputStream(out);
 		Frame frame = FrameHelper.createTextFrame(str);
+		frame.hasMask = true;
 		frame.writeTo(mBufferedOutputStream);
 		mBufferedOutputStream.flush();
 		Log.i("247144", "发送到服务端去————>command::" + str);
@@ -174,10 +176,7 @@ public class SocketDemo2Activity extends Activity {
 							
 							handshake(localSocket.getOutputStream());
 							
-							LeakyBufferedInputStream leakyIn = new LeakyBufferedInputStream(
-									localSocket.getInputStream(),
-									256);
-							LeakyBufferedInputStream input = new LeakyBufferedInputStream(leakyIn.leakBufferAndStream(), 1024);
+							LeakyBufferedInputStream input = new LeakyBufferedInputStream(localSocket.getInputStream(), 1024);
 							LightHttpServer.HttpMessageReader reader = new LightHttpServer.HttpMessageReader(input);
 							String handshakeResult = reader.readLine();
 							while (handshakeResult != null && handshakeResult != "") {
@@ -201,7 +200,7 @@ public class SocketDemo2Activity extends Activity {
 											String result = new String(frame.payloadData, 0, (int)frame.payloadLen);
 											Log.i("247144", "result......" + result);
 										} catch (Exception e) {
-											Log.i("247144", "Exception????......");
+											Log.i("247144", "frame.readFrom Exception......");
 											e.printStackTrace();
 										}
 									}
@@ -210,7 +209,7 @@ public class SocketDemo2Activity extends Activity {
 							
 							Log.i("247144", "end......");
 						} catch (IOException e) {
-							Log.i("247144", "IOException------");
+							Log.i("247144", "localSocket IOException------");
 							e.printStackTrace();
 						}
 					}

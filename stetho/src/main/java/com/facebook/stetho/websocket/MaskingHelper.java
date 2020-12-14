@@ -14,4 +14,15 @@ class MaskingHelper {
       data[offset++] ^= key[index++ % key.length];
     }
   }
+  
+  /**
+   * 异或运算
+   * 数值相同则为 0，数值不同则为 1
+   * 3 ^ 5 = 6,而 6 ^ 5 = 3
+   */
+  public static void mask(byte[] original, byte[] maskKey) {
+    for (int i = 0; i < original.length; i++) {
+      original[i] = (byte) (original[i] ^ maskKey[i % 4]);
+    }
+  }
 }
