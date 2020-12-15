@@ -40,8 +40,8 @@ import java.util.Random;
  * FIN： 1 bit
  *
  * 表示这是一个消息的最后的一帧。第一个帧也可能是最后一个。
- *  %x0 : 还有后续帧
- *  %x1 : 最后一帧
+ *  0 : 还有后续帧
+ *  1 : 最后一帧
  *
  * RSV1、2、3： 1 bit each
  *
@@ -53,14 +53,14 @@ import java.util.Random;
  *  解释说明 “Payload data” 的用途/功能
  *  如果收到了未知的opcode，最后会断开链接
  *  定义了以下几个opcode值:
- *     %x0 : 代表连续的帧
- *     %x1 : text帧
- *     %x2 ： binary帧
- *     %x3-7 ： 为非控制帧而预留的
- *     %x8 ： 关闭握手帧
- *     %x9 ： ping帧
- *     %xA :  pong帧
- *     %xB-F ： 为非控制帧而预留的
+ *     0x1 : 代表连续的帧
+ *     0x1 : text帧
+ *     0x2 ： binary帧
+ *     0x3-7 ： 为非控制帧而预留的
+ *     0x8 ： 关闭握手帧
+ *     0x9 ： ping帧
+ *     0xA :  pong帧
+ *     0xB-F ： 为非控制帧而预留的
  *
  * Mask： 1 bit
  *
