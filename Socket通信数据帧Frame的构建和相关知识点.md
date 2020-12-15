@@ -111,7 +111,6 @@ public void writeTo(BufferedOutputStream output) throws IOException {
 }
 ```
 
-
 #### 参考
 - [WebSocket协议](https://github.com/abbshr/abbshr.github.io/issues/22)
 - [数据掩码的作用](https://www.infoq.cn/article/deep-in-websocket-protocol/)
